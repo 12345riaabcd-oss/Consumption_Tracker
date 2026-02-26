@@ -1,5 +1,5 @@
-import QuickCheckIn from "./QuickCheckIn";
+import SmokeCheck from "./SmokeCheck";
 
-const Index = () => <QuickCheckIn />;
+const Index = () => <SmokeCheck />;
 
 export default Index;
