@@ -57,10 +57,10 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        smoke: {
-          slate: "hsl(207, 18%, 23%)",
-          amber: "hsl(38, 62%, 60%)",
-          teal: "hsl(177, 36%, 36%)",
+        sc: {
+          midnight: "hsl(220, 38%, 19%)",
+          coral: "hsl(16, 82%, 75%)",
+          sage: "hsl(149, 22%, 64%)",
         },
       },
       borderRadius: {
@@ -70,20 +70,12 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
       },
       animation: {
