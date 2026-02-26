@@ -129,4 +129,41 @@
   .input-peach:focus {
     @apply ring-2 ring-primary/30;
   }
+
+  /* Smoke Check theme */
+  .smoke-gradient {
+    background: linear-gradient(180deg, #E6F0F7 0%, #F1ECF7 100%);
+  }
+
+  .smoke-pill {
+    @apply rounded-[20px] px-10 py-4 text-base font-medium transition-all duration-200 ease-out min-h-[48px];
+  }
+
+  .smoke-pill:active {
+    transform: scale(1.02);
+  }
+
+  .smoke-pill-outline {
+    @apply border-2 border-[hsl(207,18%,23%)]/20 bg-transparent text-[hsl(207,18%,23%)];
+  }
+
+  .smoke-pill-slate-selected {
+    @apply bg-[hsl(207,18%,23%)] text-white;
+  }
+
+  .smoke-pill-amber-selected {
+    @apply bg-[hsl(38,62%,60%)] text-[hsl(207,18%,23%)];
+  }
+
+  .smoke-pill-teal {
+    @apply bg-[hsl(177,36%,36%)] text-white;
+  }
+
+  .smoke-input {
+    @apply bg-white/80 rounded-[20px] px-6 py-4 text-center text-base outline-none border-none w-full;
+  }
+
+  .smoke-input:focus {
+    @apply ring-2 ring-[hsl(207,18%,23%)]/20;
+  }
 }

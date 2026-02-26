@@ -57,6 +57,11 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        smoke: {
+          slate: "hsl(207, 18%, 23%)",
+          amber: "hsl(38, 62%, 60%)",
+          teal: "hsl(177, 36%, 36%)",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
