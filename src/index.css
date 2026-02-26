@@ -2,42 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Manrope:wght@400;500;600&display=swap');
 
 @layer base {
   :root {
     --background: 160 30% 94%;
-    --foreground: 207 18% 23%;
+    --foreground: 220 30% 18%;
 
     --card: 160 30% 96%;
-    --card-foreground: 207 18% 23%;
+    --card-foreground: 220 30% 18%;
 
     --popover: 160 30% 96%;
-    --popover-foreground: 207 18% 23%;
+    --popover-foreground: 220 30% 18%;
 
-    --primary: 177 36% 36%;
+    --primary: 220 38% 19%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 18 82% 77%;
-    --secondary-foreground: 207 18% 23%;
+    --secondary: 16 82% 75%;
+    --secondary-foreground: 220 30% 18%;
 
-    --muted: 160 20% 90%;
-    --muted-foreground: 207 12% 50%;
+    --muted: 250 20% 94%;
+    --muted-foreground: 220 15% 50%;
 
-    --accent: 18 82% 77%;
-    --accent-foreground: 207 18% 23%;
+    --accent: 16 82% 75%;
+    --accent-foreground: 220 30% 18%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 160 20% 85%;
-    --input: 24 100% 96%;
-    --ring: 177 36% 36%;
+    --border: 250 15% 88%;
+    --input: 250 20% 96%;
+    --ring: 220 38% 19%;
 
     --radius: 1.125rem;
-
-    --gradient-top: #E6F2EE;
-    --gradient-bottom: #DFF4F1;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -50,27 +47,25 @@
   }
 
   .dark {
-    --background: 207 18% 10%;
-    --foreground: 160 20% 95%;
-    --card: 207 18% 12%;
-    --card-foreground: 160 20% 95%;
-    --popover: 207 18% 12%;
-    --popover-foreground: 160 20% 95%;
-    --primary: 177 36% 45%;
+    --background: 220 30% 8%;
+    --foreground: 250 20% 95%;
+    --card: 220 30% 10%;
+    --card-foreground: 250 20% 95%;
+    --popover: 220 30% 10%;
+    --popover-foreground: 250 20% 95%;
+    --primary: 220 38% 40%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 18 82% 77%;
-    --secondary-foreground: 207 18% 23%;
-    --muted: 207 18% 18%;
-    --muted-foreground: 160 15% 60%;
-    --accent: 18 82% 77%;
-    --accent-foreground: 207 18% 23%;
+    --secondary: 16 82% 75%;
+    --secondary-foreground: 220 30% 18%;
+    --muted: 220 25% 15%;
+    --muted-foreground: 250 15% 60%;
+    --accent: 16 82% 75%;
+    --accent-foreground: 220 30% 18%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 100%;
-    --border: 207 18% 20%;
-    --input: 207 18% 18%;
-    --ring: 177 36% 45%;
-    --gradient-top: #1a2e2a;
-    --gradient-bottom: #1a2d2c;
+    --border: 220 25% 18%;
+    --input: 220 25% 15%;
+    --ring: 220 38% 40%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -88,82 +83,87 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    @apply bg-background text-foreground;
+    font-family: 'Manrope', 'DM Sans', system-ui, -apple-system, sans-serif;
   }
 }
 
 @layer utilities {
-  .gradient-bg {
-    background: linear-gradient(180deg, var(--gradient-top) 0%, var(--gradient-bottom) 100%);
+  /* Smoke Check Premium Theme */
+  .sc-gradient {
+    background: linear-gradient(180deg, #F4F0FA 0%, #EAF4FB 100%);
   }
 
-  .pill-button {
-    @apply rounded-full px-10 py-4 text-base font-medium transition-all duration-200 ease-out;
+  .sc-heading {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
   }
 
-  .pill-button:active {
-    transform: scale(1.03);
+  .sc-body {
+    font-family: 'Manrope', system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
   }
 
-  .pill-primary {
-    @apply bg-primary text-primary-foreground;
+  .sc-pill {
+    @apply rounded-[22px] px-10 py-4 text-base font-medium transition-all duration-200 ease-out;
+    min-height: 52px;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-weight: 500;
   }
 
-  .pill-outline {
-    @apply border-2 border-primary/30 bg-transparent text-foreground;
-  }
-
-  .pill-outline-selected {
-    @apply bg-primary text-primary-foreground border-primary;
-  }
-
-  .pill-accent-selected {
-    @apply bg-accent text-accent-foreground border-accent;
-  }
-
-  .input-peach {
-    @apply bg-input rounded-full px-6 py-4 text-center text-base outline-none border-none w-full;
-  }
-
-  .input-peach:focus {
-    @apply ring-2 ring-primary/30;
-  }
-
-  /* Smoke Check theme */
-  .smoke-gradient {
-    background: linear-gradient(180deg, #E6F0F7 0%, #F1ECF7 100%);
-  }
-
-  .smoke-pill {
-    @apply rounded-[20px] px-10 py-4 text-base font-medium transition-all duration-200 ease-out min-h-[48px];
-  }
-
-  .smoke-pill:active {
+  .sc-pill:active {
     transform: scale(1.02);
   }
 
-  .smoke-pill-outline {
-    @apply border-2 border-[hsl(207,18%,23%)]/20 bg-transparent text-[hsl(207,18%,23%)];
+  .sc-pill-outline {
+    border: 2px solid hsl(220 30% 18% / 0.15);
+    background: transparent;
+    color: hsl(220, 30%, 18%);
   }
 
-  .smoke-pill-slate-selected {
-    @apply bg-[hsl(207,18%,23%)] text-white;
+  .sc-pill-outline:hover {
+    border-color: hsl(220 30% 18% / 0.3);
   }
 
-  .smoke-pill-amber-selected {
-    @apply bg-[hsl(38,62%,60%)] text-[hsl(207,18%,23%)];
+  .sc-pill-midnight {
+    background: hsl(220, 38%, 19%);
+    color: white;
   }
 
-  .smoke-pill-teal {
-    @apply bg-[hsl(177,36%,36%)] text-white;
+  .sc-pill-coral {
+    background: hsl(16, 82%, 75%);
+    color: hsl(220, 30%, 18%);
   }
 
-  .smoke-input {
-    @apply bg-white/80 rounded-[20px] px-6 py-4 text-center text-base outline-none border-none w-full;
+  .sc-pill-sage {
+    background: hsl(149, 22%, 64%);
+    color: hsl(220, 30%, 18%);
   }
 
-  .smoke-input:focus {
-    @apply ring-2 ring-[hsl(207,18%,23%)]/20;
+  .sc-shadow {
+    box-shadow: 0 4px 20px -4px hsl(220 38% 19% / 0.2);
+  }
+
+  .sc-input {
+    background: white;
+    border-radius: 22px;
+    padding: 16px 24px;
+    text-align: center;
+    font-size: 1rem;
+    outline: none;
+    border: 2px solid hsl(220 30% 18% / 0.1);
+    width: 100%;
+    font-family: 'Manrope', system-ui, sans-serif;
+    transition: border-color 0.2s ease;
+  }
+
+  .sc-input:focus {
+    border-color: hsl(220 30% 18% / 0.3);
+  }
+
+  .sc-input::placeholder {
+    color: hsl(220 30% 18% / 0.35);
   }
 }
