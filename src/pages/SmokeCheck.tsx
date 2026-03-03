@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Check } from "lucide-react";
+import { Check, BarChart3 } from "lucide-react";
+import { saveCheckIn, getTodayKey, getHistory } from "@/lib/checkin-storage";
+import WeeklyHistory from "@/components/WeeklyHistory";
 
 type Screen =
+  | "history"
   | "start"
   | "how-many"
   | "urge-time"
@@ -28,7 +31,8 @@ const fade = {
 };
 
 const SmokeCheck = () => {
-  const [screen, setScreen] = useState<Screen>("start");
+  const hasAnyHistory = getHistory().length > 0;
+  const [screen, setScreen] = useState<Screen>(hasAnyHistory ? "history" : "start");
   const [smoked, setSmoked] = useState("");
   const [count, setCount] = useState("");
   const [urge, setUrge] = useState("");
@@ -39,6 +43,19 @@ const SmokeCheck = () => {
     setTimeout(() => setScreen(next), delay);
   };
 
+  const saveAndFinish = (didSmoke: boolean) => {
+    saveCheckIn({
+      date: getTodayKey(),
+      smoked: didSmoke,
+      ...(didSmoke && {
+        count,
+        urgeTime: urge,
+        feeling,
+        reflection: step || undefined,
+      }),
+    });
+  };
+
   const countOptions = ["1", "2–3", "4–5", "More than 5"];
   const urgeOptions = ["Morning", "Afternoon", "Evening", "Late night"];
   const feelOptions = ["Okay", "Neutral", "Not great"];
@@ -47,6 +64,14 @@ const SmokeCheck = () => {
     <div className="sc-gradient min-h-screen flex items-center justify-center px-6">
       <div className="w-full max-w-sm">
         <AnimatePresence mode="wait">
+
+          {/* WEEKLY HISTORY */}
+          {screen === "history" && (
+            <WeeklyHistory
+              key="history"
+              onClose={() => setScreen("start")}
+            />
+          )}
 
           {/* SCREEN 1 – Start */}
           {screen === "start" && (
@@ -73,6 +98,16 @@ const SmokeCheck = () => {
                   </button>
                 ))}
               </div>
+
+              {hasAnyHistory && (
+                <button
+                  onClick={() => setScreen("history")}
+                  className="flex items-center gap-2 text-sm sc-body text-sc-midnight/40 hover:text-sc-midnight/60 transition-colors mt-2"
+                >
+                  <BarChart3 className="w-4 h-4" />
+                  View Weekly History
+                </button>
+              )}
             </motion.div>
           )}
 
@@ -160,7 +195,10 @@ const SmokeCheck = () => {
                 autoFocus
               />
               <button
-                onClick={() => setScreen("yes-done")}
+                onClick={() => {
+                  saveAndFinish(true);
+                  setScreen("yes-done");
+                }}
                 className="sc-pill sc-pill-midnight sc-shadow mt-2"
               >
                 Save Today
@@ -196,7 +234,10 @@ const SmokeCheck = () => {
                 That choice matters more than you think.
               </p>
               <button
-                onClick={() => go("no-close", 0)}
+                onClick={() => {
+                  saveAndFinish(false);
+                  go("no-close", 0);
+                }}
                 className="sc-pill sc-pill-midnight sc-shadow mt-6"
               >
                 Continue
@@ -235,6 +276,14 @@ const SmokeCheck = () => {
                 <Check className="w-8 h-8 text-white" />
               </div>
               <p className="sc-heading text-lg text-sc-midnight">Saved</p>
+
+              <button
+                onClick={() => setScreen("history")}
+                className="flex items-center gap-2 text-sm sc-body text-sc-midnight/40 hover:text-sc-midnight/60 transition-colors mt-4"
+              >
+                <BarChart3 className="w-4 h-4" />
+                View Your Week
+              </button>
             </motion.div>
           )}
 
